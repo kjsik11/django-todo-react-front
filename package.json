@@ -3,7 +3,7 @@
   "version": "3.1.0",
   "description": "template project",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "lint": "next lint",
     "start": "next start"
@@ -23,17 +23,22 @@
     "@tailwindcss/forms": "0.3.3",
     "@tailwindcss/line-clamp": "0.2.1",
     "classnames": "2.3.1",
+    "cors": "^2.8.5",
+    "mongodb": "3.6.7",
     "next": "11.0.1",
     "nprogress": "0.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.10",
+    "@types/mongodb": "3.6.13",
     "@types/nprogress": "0.2.0",
     "@types/react": "17.0.11",
     "autoprefixer": "10.2.6",
     "eslint": "7.29.0",
     "eslint-config-next": "11.0.1",
+    "eslint-config-prettier": "8.3.0",
     "postcss": "8.3.5",
     "postcss-focus-visible": "5.0.0",
     "prettier": "2.3.1",
