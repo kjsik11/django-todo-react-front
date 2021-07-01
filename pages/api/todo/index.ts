@@ -1,8 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { withErrorHandler } from '@utils/with-error-handler';
-import { connectMongo, throwError } from '@utils/common';
+import { connectMongo, runMiddleware, throwError } from '@utils/common';
+import Cors from 'cors';
+
+const cors = Cors({
+  methods: ['GET', 'POST'],
+});
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  await runMiddleware(req, res, cors);
+
   const { db } = await connectMongo();
 
   if (req.method === 'GET') {
@@ -46,8 +53,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       deleted: null,
     });
 
-    return res.status(201).end();
-    // return res.json({ insertedId });
+    return res.json({ insertedId });
   }
 
   return throwError(res, 1, 400);
