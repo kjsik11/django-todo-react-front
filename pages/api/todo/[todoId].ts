@@ -5,7 +5,7 @@ import { ObjectId } from 'mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const cors = Cors({
-  methods: ['PATCH', 'GET'],
+  methods: ['PATCH', 'GET', 'DELETE'],
 });
 
 const handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void> = async (req, res) => {
