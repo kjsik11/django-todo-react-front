@@ -59,7 +59,7 @@ const throwError: (
       message = 'Not admin.';
       break;
     case 13:
-      message = 'No such notice.';
+      message = 'No such item.';
       break;
     case 14:
       message = 'No such purchase.';

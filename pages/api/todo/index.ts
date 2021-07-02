@@ -24,14 +24,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           created: -1,
         },
       },
-      {
-        $project: {
-          _id: 1,
-          title: 1,
-          content: 1,
-          compelete: 1,
-        },
-      },
     ]);
 
     const todoList = await cursor.toArray();
@@ -40,14 +32,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (req.method === 'POST') {
-    const { title, content } = req.body;
+    const { title } = req.body;
 
-    if (!title || !content) return throwError(res, 8, 404);
+    if (!title) return throwError(res, 8, 404);
 
     const { insertedId } = await db.collection('todo').insertOne({
       title,
-      content,
-      compelete: false,
+      done: false,
       created: new Date(),
       lastUpdated: new Date(),
       deleted: null,
