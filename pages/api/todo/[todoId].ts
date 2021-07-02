@@ -28,7 +28,7 @@ const handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void> = as
   }
 
   if (req.method === 'PATCH') {
-    await db.collection('todo').updateOne(
+    const { upsertedId } = await db.collection('todo').updateOne(
       { _id: todoItem._id },
       {
         $set: {
@@ -37,6 +37,8 @@ const handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void> = as
         },
       },
     );
+
+    return res.json({ upsertedId });
   }
 
   if (req.method === 'DELETE') {
@@ -48,6 +50,7 @@ const handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void> = as
         },
       },
     );
+    return res.status(204).end();
   }
 
   return throwError(res, 1, 400);
