@@ -2,8 +2,6 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { withErrorHandler } from '@utils/with-error-handler';
 import { connectMongo, runMiddleware, throwError } from '@utils/common';
 import Cors from 'cors';
-import { ObjectId } from 'mongodb';
-import isNumeric from 'validator';
 import Joi from 'joi';
 import { createError } from '@defines/errors';
 import { verifySession } from '@utils/auth/verifySession';
