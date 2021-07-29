@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       username: Joi.string().label('username').required(),
       name: Joi.string().label('name').required(),
       password: Joi.string().label('password').required(),
-      birth: Joi.number().label('birth'),
+      birth: Joi.number().label('birth').allow(''),
     });
 
     await userSchema.validateAsync(req.body);
