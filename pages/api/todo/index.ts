@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { withErrorHandler } from '@utils/with-error-handler';
 import { connectMongo, runMiddleware, throwError } from '@utils/common';
 import Cors from 'cors';
+import { ObjectId } from 'mongodb';
 
 const cors = Cors({
   methods: ['GET', 'POST'],
@@ -13,20 +14,22 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { db } = await connectMongo();
 
   if (req.method === 'GET') {
-    const cursor = db.collection('todo').aggregate([
-      {
-        $match: {
-          deleted: { $eq: null },
-        },
-      },
-      {
-        $sort: {
-          created: -1,
-        },
-      },
-    ]);
+    // const cursor = db.collection('todo').aggregate([
+    //   {
+    //     $match: {
+    //       deleted: { $eq: null },
+    //     },
+    //   },
+    //   {
+    //     $sort: {
+    //       created: -1,
+    //     },
+    //   },
+    // ]);
 
-    const todoList = await cursor.toArray();
+    // const todoList = await cursor.toArray();
+
+    const todoList = await db.collection('todo').find({ deleted: null }).toArray();
 
     return res.json({ todoList });
   }
@@ -36,8 +39,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (!title) return throwError(res, 8, 404);
 
-    const { insertedId } = await db.collection('todo').insertOne({
-      title,
+    const { insertedId }: { insertedId: ObjectId } = await db.collection('todo').insertOne({
+      title: title,
       done: false,
       created: new Date(),
       lastUpdated: new Date(),

@@ -1,6 +1,6 @@
 import { isString } from '@utils/validator/common';
 
-const ERROR_VARIANTS = ['CE'] as const;
+const ERROR_VARIANTS = ['CE', 'AE', 'TE'] as const;
 type ErrorCode = `${typeof ERROR_VARIANTS[number]}${number}`;
 
 export interface CustomError {
@@ -47,6 +47,35 @@ const ERRORS = {
     code: 'CE002',
     name: 'Validation failed',
     message: "Check your request's validity.",
+  },
+
+  // Authorization Error
+  ALREADY_EXIST_USER: {
+    code: 'AE000',
+    name: 'Already exist user',
+    message: 'check your userId.',
+  },
+  WRONG_ID: {
+    code: 'AE001',
+    name: 'Wrong id or password',
+    message: 'check your input values',
+  },
+
+  //Token Error
+  TOKEN_EXPIRED: {
+    code: 'TE000',
+    name: 'Token expired',
+    message: 'check your token.',
+  },
+  INVALID_TOKEN: {
+    code: 'TE001',
+    name: 'Invalid expired',
+    message: 'check your token.',
+  },
+  TOKEN_EMPTY: {
+    code: 'TE002',
+    name: 'Token empty',
+    message: 'check your token.',
   },
 } as const;
 
