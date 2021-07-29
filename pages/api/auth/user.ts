@@ -28,20 +28,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     await userSchema.validateAsync(req.body);
 
     const { username, password } = req.body;
-    console.log('hell2');
 
     const user = await db.collection('auth').findOne({ username, password, deleted: null });
 
     if (!user) res.status(404).json(createError('WRONG_ID'));
-
-    console.log('hello');
 
     const accessToken = signToken({ userId: user._id }, { expiresIn: ACCESS_TOKEN_EXPIRES_IN });
 
     res.setHeader('Set-Cookie', [
       serialize(COOKIE_KEY_ACCESS_TOKEN, accessToken, defaultCookieOptions),
     ]);
-    console.log('hello3');
 
     return res.status(200).json({ accessToken });
   }
