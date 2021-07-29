@@ -11,9 +11,7 @@ import { serialize } from 'cookie';
 import { COOKIE_KEY_ACCESS_TOKEN, defaultCookieOptions } from '@defines/cookie';
 
 const cors = Cors({
-  origin: '*',
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
+  methods: ['GET', 'POST', 'DELETE'],
 });
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
