@@ -3,7 +3,7 @@ export const COOKIE_KEY_REDIRECT_URL = 'jongsik.redirectUrl';
 
 export const defaultCookieOptions = {
   path: '/',
-  sameSite: 'lax',
+  sameSite: 'none',
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
 } as const;
