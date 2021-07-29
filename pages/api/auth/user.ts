@@ -39,7 +39,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       serialize(COOKIE_KEY_ACCESS_TOKEN, accessToken, defaultCookieOptions),
     ]);
 
-    return res.json({ accessToken });
+    return res.status(200).json({ accessToken });
   }
 
   const { userId } = verifySession(req, res);
