@@ -20,8 +20,6 @@ export function verifySession(
 ) {
   const accessToken = req.cookies[COOKIE_KEY_ACCESS_TOKEN];
 
-  console.log(accessToken);
-
   if (!accessToken) {
     res.status(401);
     throw createError('TOKEN_EMPTY');
