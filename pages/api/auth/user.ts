@@ -38,10 +38,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const accessToken = signToken({ userId: user._id }, { expiresIn: ACCESS_TOKEN_EXPIRES_IN });
 
     res.setHeader('Set-Cookie', [
-      serialize(COOKIE_KEY_ACCESS_TOKEN, accessToken, {
-        ...defaultCookieOptions,
-        domain: req.headers.referer ?? undefined,
-      }),
+      serialize(COOKIE_KEY_ACCESS_TOKEN, accessToken, defaultCookieOptions),
     ]);
 
     return res.status(200).json({ accessToken });
