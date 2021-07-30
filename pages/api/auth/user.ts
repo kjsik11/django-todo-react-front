@@ -12,6 +12,8 @@ import { COOKIE_KEY_ACCESS_TOKEN, defaultCookieOptions } from '@defines/cookie';
 
 const cors = Cors({
   methods: ['GET', 'POST', 'DELETE'],
+  origin: ['http://localhost:3000'],
+  credentials: true,
 });
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
